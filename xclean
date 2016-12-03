@@ -1,0 +1,21 @@
+#!/bin/bash
+if [[ "$1" == "-kill" ]]; then
+    echo -n "Killing Xcode... "
+    killall Xcode
+    echo "Done."
+fi;
+echo -n "Cleaning iOS DeviceSupport... "
+rm -rf ~/Library/Developer/Xcode/iOS\ DeviceSupport
+echo "Done."
+echo -n "Cleaning DerivedData... "
+rm -rf ~/Library/Developer/Xcode/DerivedData
+echo "Done."
+echo -n "Cleaning iOS Device Logs... "
+rm -rf ~/Library/Developer/Xcode/iOS\ Device\ Logs
+echo "Done."
+echo "Input root password to clean ModuleCache."
+moduleCache=$(sudo find /var/folders -name "org.llvm.clang.$(whoami)")
+echo -n "Cleaning ModuleCache... "
+sudo rm -rf $moduleCache
+echo "Done."
+echo "All done!"
